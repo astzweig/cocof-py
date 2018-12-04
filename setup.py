@@ -11,6 +11,7 @@ setup(
     description='Consistent CLI config file modifier',
     long_description=long_description,
     long_description_content_type="text/markdown",
+    packages=find_packages(),
     url='https://github.com/astzweig/cocof-py',
     keywords=['toml', 'yaml', 'json', 'terminal', 'cli', 'edit'],
     classifiers=[
@@ -23,5 +24,15 @@ setup(
         'Topic :: Utilities',
         'Programming Language :: Python :: 3.6',
         'Operating System :: OS Independent',
-    ]
+    ],
+    install_requires=[
+        # Assuming semantic versioning, prevent dependencies from breaking
+        # changes.
+        'click >= 7.0, < 8.0'
+    ],
+    entry_points={
+        'console_scripts': [
+            'cocof = cocof.cocof:cli'
+        ]
+    }
 )
