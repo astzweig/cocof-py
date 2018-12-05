@@ -28,11 +28,18 @@ setup(
     install_requires=[
         # Assuming semantic versioning, prevent dependencies from breaking
         # changes.
-        'click >= 7.0, < 8.0'
+        'click >= 7.0, < 8.0',
+        'tomlkit < 1.0',
+        'ruamel.yaml < 1.0'
     ],
     entry_points={
         'console_scripts': [
             'cocof = cocof.cocof:cli'
         ]
-    }
+    },
+    test_suite='tests',
+    tests_require='parameterized >=0.6.3',
+    dependency_links=[
+        'git+https://github.com/wolever/parameterized#egg=parameterized-0.6.3'
+    ]
 )
