@@ -17,13 +17,17 @@ setup(
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: European Union Public Licence 1.2 (EUPL 1.2)',
+        'License :: OSI Approved :: European Union Public Licence 1.2 '
+        '(EUPL 1.2)',
         'Topic :: Database',
         'Topic :: Terminals',
         'Topic :: Text Processing',
         'Topic :: Utilities',
         'Programming Language :: Python :: 3.6',
         'Operating System :: OS Independent',
+    ],
+    setup_requires=[
+        'flake8'
     ],
     install_requires=[
         # Assuming semantic versioning, prevent dependencies from breaking

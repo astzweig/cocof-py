@@ -10,7 +10,7 @@ TESTDATA = [
     ('json', 'test.json')
 ]
 
-TESTFIXTURE=[]
+TESTFIXTURE = []
 for content_type, filename in TESTDATA:
     with open(os.path.join(TESTDATA_DIR, filename)) as f:
         file_content = f.read()
