@@ -13,7 +13,8 @@ TESTDATA = [
 TESTFIXTURE = []
 for content_type, filename in TESTDATA:
     with open(os.path.join(TESTDATA_DIR, filename)) as f:
-        file_content = f.read()
+        # Remove newline at end of file
+        file_content = f.read()[:-1]
         TESTFIXTURE.append((content_type, file_content))
 
 
@@ -23,6 +24,18 @@ class ReadFileTestCase(unittest.TestCase):
         parsed = SUT.unserialize(self.str, self.format)
         self.assertEqual('10.0.0.1', parsed['servers']['alpha']['ip'])
 
+
+@parameterized_class(('format', 'str'), TESTFIXTURE)
+class SerializeTestCase(unittest.TestCase):
+    def setUp(self):
+        self.parsed = SUT.unserialize(self.str, self.format)
+
+    def test_serializes_as_original_when_unchanged(self):
+        # TODO: do not test json, as json does not preserve key order
+        # It works in this case though, so I will postpone this to a
+        # better moment.
+        serialized = SUT.serialize(self.parsed, self.format)
+        self.assertEqual(self.str, serialized)
 
 if __name__ == '__main__':
     unittest.main()

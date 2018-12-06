@@ -2,7 +2,10 @@
 import os
 import tomlkit as TOML
 import json as JSON
-from ruamel.yaml import YAML
+from ruamel.yaml import (
+        round_trip_load as yaml_deserialize,
+        round_trip_dump as yaml_serialize
+)
 
 
 def getFileExt(filepath):
@@ -31,7 +34,25 @@ def unserialize(serialized_str, format_hint):
         return JSON.loads(serialized_str)
 
     elif format_hint == 'yaml':
-        return YAML().load(serialized_str)
+        return yaml_deserialize(serialized_str)
+
+
+def serialize(datastructure, format_hint):
+    """Serialize the datastructure to either YAML, TOML or JSON string.
+
+    Args:
+        datastructure (any): The datastructure to serialize into a string
+                             using 'format_hint' format.
+        format_hint (str): see 'unserialize'.
+    """
+    if format_hint == 'toml':
+        return TOML.dumps(datastructure)
+
+    elif format_hint == 'json':
+        return JSON.dumps(datastructure, indent=2)
+
+    elif format_hint == 'yaml':
+        return yaml_serialize(datastructure)[:-1]
 
 
 def parse_file(filepath):
