@@ -20,7 +20,7 @@ for content_type, filename in TESTDATA:
 @parameterized_class(('format', 'str'), TESTFIXTURE)
 class ReadFileTestCase(unittest.TestCase):
     def test_parse_content(self):
-        parsed = SUT.parse_content(self.str, self.format)
+        parsed = SUT.unserialize(self.str, self.format)
         self.assertEqual('10.0.0.1', parsed['servers']['alpha']['ip'])
 
 
