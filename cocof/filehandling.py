@@ -18,7 +18,7 @@ def getFileExt(filepath):
     return file_ext[1:]
 
 
-def unserialize(serialized_str, format_hint):
+def deserialize(serialized_str, format_hint):
     """Parse a string in YAML, TOML or JSON format into python
     datastructures.
 
@@ -61,4 +61,4 @@ def parse_file(filepath):
     with open(filepath, 'r') as f:
         filecontent = f.read()
     file_ext = getFileExt(filepath)
-    return unserialize(filecontent, file_ext)
+    return deserialize(filecontent, file_ext)

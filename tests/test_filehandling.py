@@ -19,16 +19,16 @@ for content_type, filename in TESTDATA:
 
 
 @parameterized_class(('format', 'str'), TESTFIXTURE)
-class ReadFileTestCase(unittest.TestCase):
-    def test_parse_content(self):
-        parsed = SUT.unserialize(self.str, self.format)
+class DeserializeTestCase(unittest.TestCase):
+    def test_deserializes_hash_tables(self):
+        parsed = SUT.deserialize(self.str, self.format)
         self.assertEqual('10.0.0.1', parsed['servers']['alpha']['ip'])
 
 
 @parameterized_class(('format', 'str'), TESTFIXTURE)
 class SerializeTestCase(unittest.TestCase):
     def setUp(self):
-        self.parsed = SUT.unserialize(self.str, self.format)
+        self.parsed = SUT.deserialize(self.str, self.format)
 
     def test_serializes_as_original_when_unchanged(self):
         # TODO: do not test json, as json does not preserve key order
@@ -36,6 +36,7 @@ class SerializeTestCase(unittest.TestCase):
         # better moment.
         serialized = SUT.serialize(self.parsed, self.format)
         self.assertEqual(self.str, serialized)
+
 
 if __name__ == '__main__':
     unittest.main()
