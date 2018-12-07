@@ -62,3 +62,11 @@ def parse_file(filepath):
         filecontent = f.read()
     file_ext = getFileExt(filepath)
     return deserialize(filecontent, file_ext)
+
+
+def write_to_file(filepath, datastructure):
+    """Write the datastructure into the conifg file at 'filepath'."""
+    file_ext = getFileExt(filepath)
+    serialized = serialize(datastructure, file_ext)
+    with open(filepath, 'w') as f:
+        f.write(serialized)
