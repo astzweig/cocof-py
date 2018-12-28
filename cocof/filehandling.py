@@ -2,6 +2,7 @@
 import os
 import tomlkit as TOML
 import json as JSON
+from click import open_file
 from ruamel.yaml import (
         round_trip_load as yaml_deserialize,
         round_trip_dump as yaml_serialize
@@ -16,6 +17,14 @@ def getFileExt(filepath):
         file_ext = 'yaml'
 
     return file_ext[1:]
+
+
+def guessFileFormat(filepath, format_hint):
+    if format_hint is None:
+        format_hint = getFileExt(filepath)
+        if format_hint == '':
+            raise ValueError('Cannot figure out file format.')
+    return format_hint
 
 
 def deserialize(serialized_str, format_hint):
@@ -55,18 +64,18 @@ def serialize(datastructure, format_hint):
         return yaml_serialize(datastructure)[:-1]
 
 
-def parse_file(filepath):
+def parse_file(filepath, format_hint=None):
     """Read the config file into python data structures. The file at filepath
     must be readable by this process."""
-    with open(filepath, 'r') as f:
+    format_hint = guessFileFormat(filepath, format_hint)
+    with open_file(filepath, 'r') as f:
         filecontent = f.read()
-    file_ext = getFileExt(filepath)
-    return deserialize(filecontent, file_ext)
+    return deserialize(filecontent, format_hint)
 
 
-def write_to_file(filepath, datastructure):
+def write_to_file(filepath, datastructure, format_hint=None):
     """Write the datastructure into the conifg file at 'filepath'."""
-    file_ext = getFileExt(filepath)
-    serialized = serialize(datastructure, file_ext)
-    with open(filepath, 'w') as f:
+    format_hint = guessFileFormat(filepath, format_hint)
+    serialized = serialize(datastructure, format_hint)
+    with open_file(filepath, 'w') as f:
         f.write(serialized)
