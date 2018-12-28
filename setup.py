@@ -34,7 +34,8 @@ setup(
         # changes.
         'click >= 7.0, < 8.0',
         'tomlkit < 1.0',
-        'ruamel.yaml < 1.0'
+        'ruamel.yaml < 1.0',
+        'jsonpatch >= 1.23, < 2.0'
     ],
     entry_points={
         'console_scripts': [
