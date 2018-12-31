@@ -36,7 +36,7 @@ def cli(filepath, jsonpatch, file_format):
         click.secho('Error: Could not guess file format or invalid file'
                     ' format provided.', fg='red', err=True)
         return 101
-    except JSONDecodeError:
+    except (JSONDecodeError, TypeError):
         click.secho('ERROR: Invalid jsonpatch provided. A possible solution'
                     ' would be to verify the jsonpatch using an online'
                     'verifier.', fg='red', err=True)
