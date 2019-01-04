@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# coding: utf-8
 import click
 from jsonpatch import JsonPatch
 from json.decoder import JSONDecodeError
