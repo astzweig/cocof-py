@@ -33,15 +33,15 @@ def cli(filepath, jsonpatch, file_format):
         patch = JsonPatch.from_string(jsonpatch)
         result = patch.apply(data)
         write_to_file(filepath, result, file_format)
-    except ValueError:
-        click.secho('Error: Could not guess file format or invalid file'
-                    ' format provided.', fg='red', err=True)
-        return 101
     except (JSONDecodeError, TypeError):
         click.secho('ERROR: Invalid jsonpatch provided. A possible solution'
                     ' would be to verify the jsonpatch using an online'
                     'verifier.', fg='red', err=True)
         return 102
+    except BaseException as e:
+        click.secho('Error: Something went wrong. Developer info: ' + str(e),
+                    fg='red', err=True)
+        return 101
     return 0
 
 
