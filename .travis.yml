@@ -11,3 +11,13 @@ install:
 
 script:
   - python setup.py test
+
+deploy:
+  provider: pypi
+  user: "astzweig"
+  password:
+      secure: "CkS8rg/5iOsJJtL+F7XuKR7rC/ZsnWishZe5dmIJ97hlEeztKqv6WH6OQjZ0iopgQEr1BxlAFRhLse/HOommJfo2AsZcKT8J6dkeCeQEmVrFD6VayWyaJXswR0p+p/sVAd7WCrAcjgdtiABPXpUXj6rmn4CR0nbohOc2++HUgAx+Sa+pyCmJHodfZM8GhoTFsq31SiRqCuOe/rkNyBPUdER1xgGgTXb+gh5TauIpXjrpGIlXDqw5szJeHT7YUv6dpdpGCIwZ3MGrzGCAfQvLGW9UoC/RTZloWP7JMuy7gv9vSa0iGwr8u/cpZvRd/LKjHCn5pwic7hJoQ059ozJ3uMcuvvhWDI6juYHI7fdpTjktGhwAfctF8PE8okwKYtbj+AdDanvRDyO7g/0WgqDwod5UubmPpg/M05KeV6ppKbfZjt/zqvoU7WZvKcNU2Zhm/pMzPVnkBzmwmbN2HRsvFJG63pmFCz0Rvr6UnlRxR3wSA4i0xbNvK93WNOxKB91APnWlCD+8tERWgQS/vGXxp9eNhRJ6+DihSiKvlFRDGp5DDtprjvApEJl74SPMYN+NjemOHC532rVHATtEUvDn9+lxWjx2zjChj+YIHtN1RTrRXDBZb3dT9heUH/dCrz9XIK57Yk+6X3DGmx6B1otcDhifYhOaro+Wn53TTtICKmM="
+  skip_existing: true
+  on:
+      tags: true
+      branch: master
