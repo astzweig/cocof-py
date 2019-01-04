@@ -31,9 +31,6 @@ class SerializeTestCase(unittest.TestCase):
         self.parsed = SUT.deserialize(self.str, self.format)
 
     def test_serializes_as_original_when_unchanged(self):
-        # TODO: do not test json, as json does not preserve key order
-        # It works in this case though, so I will postpone this to a
-        # better moment.
         serialized = SUT.serialize(self.parsed, self.format)
         self.assertEqual(self.str, serialized)
 

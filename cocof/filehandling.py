@@ -3,6 +3,7 @@
 import os
 import tomlkit as TOML
 import json as JSON
+from collections import OrderedDict
 from click import open_file
 from ruamel.yaml import (
         round_trip_load as yaml_deserialize,
@@ -41,7 +42,8 @@ def deserialize(serialized_str, format_hint):
         return TOML.loads(serialized_str)
 
     elif format_hint == 'json':
-        return JSON.loads(serialized_str)
+        # Use ordered dict, to keep order of keys as readed.
+        return JSON.loads(serialized_str, object_pairs_hook=OrderedDict)
 
     elif format_hint == 'yaml':
         return yaml_deserialize(serialized_str)
@@ -59,7 +61,9 @@ def serialize(datastructure, format_hint):
         return TOML.dumps(datastructure)
 
     elif format_hint == 'json':
-        return JSON.dumps(datastructure, indent=2)
+        output = JSON.dumps(datastructure, indent=2)
+        # Remove whitespace before line breaks (needed for Python2.7)
+        return output.replace(' \n', '\n')
 
     elif format_hint == 'yaml':
         return yaml_serialize(datastructure)[:-1]
