@@ -2,7 +2,10 @@
 # coding: utf-8
 import click
 from jsonpatch import JsonPatch
-from json.decoder import JSONDecodeError
+try:
+    from json.decoder import JSONDecodeError
+except ImportError:
+    JSONDecodeError = ValueError
 from .filehandling import parse_file, write_to_file
 
 
