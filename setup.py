@@ -47,6 +47,7 @@ setup(
     test_suite='tests',
     tests_require='parameterized >=0.6.3',
     dependency_links=[
-        'git+https://github.com/wolever/parameterized#egg=parameterized-0.6.3'
+        'git+https://github.com/wolever/parameterized.git@4cd3b99b99604a1a01'
+        '836dd0466a54b1ca977114#egg=parameterized-0.6.3'
     ]
 )
