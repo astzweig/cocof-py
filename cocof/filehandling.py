@@ -15,8 +15,8 @@ def getFileExt(filepath):
     filename, file_ext = os.path.splitext(filepath)
 
     # Standarize extensions
-    if file_ext == 'yml':
-        file_ext = 'yaml'
+    if file_ext == '.yml':
+        file_ext = '.yaml'
 
     return file_ext[1:]
 
