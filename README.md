@@ -1,4 +1,7 @@
 # Cocof
+[![Build Status](https://travis-ci.org/astzweig/cocof-py.svg?branch=master)](https://travis-ci.org/astzweig/cocof-py)
+[![PyPI version](https://badge.fury.io/py/cocof.svg)](https://badge.fury.io/py/cocof)
+
 Cocof, short for consistent config file, is a python module that allows the
 modification of different key-value config files on the comand line.
 
