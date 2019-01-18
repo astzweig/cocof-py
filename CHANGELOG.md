@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2019-01-18
+### Added
+- Support read and write of `plist` file format (a format mostly found on
+Apple's macOS). Supported are both xml and binary plists.
+
+### Changed
+- Better error messages. `cocof` showed a single message for a whole group of
+errors and sometimes the reason of the message would not be the reason of the
+error and hence the message would mislead.
+
 ## [1.0.1] - 2019-01-05
 ### Added
 - We now use travis to deploy the package to pypi. That way pypi should always

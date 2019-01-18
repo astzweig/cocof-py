@@ -7,7 +7,7 @@ with open('README.md', 'r') as f:
 
 setup(
     name='cocof',
-    version="1.0.1",
+    version="1.2.0",
     author='Astzweig UG(haftungsbeschränkt) & Co. KG',
     author_email='it@astzweig.de',
     description='Consistent CLI config file modifier',
