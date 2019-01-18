@@ -7,15 +7,17 @@ TESTDATA_DIR = os.path.dirname(__file__)
 TESTDATA = [
     ('toml', 'test.toml'),
     ('yaml', 'test.yml'),
-    ('json', 'test.json')
+    ('json', 'test.json'),
+    ('plist', 'de.astzweig.test.plist'),
+    ('plist_binary', 'de.astzweig.test.binary.plist')
 ]
 
 TESTFIXTURE = []
 for content_type, filename in TESTDATA:
-    with open(os.path.join(TESTDATA_DIR, filename)) as f:
+    with open(os.path.join(TESTDATA_DIR, filename), 'rb') as f:
         # Remove newline at end of file
-        file_content = f.read()[:-1]
-        TESTFIXTURE.append((content_type, file_content))
+        file_content = f.read().rstrip(os.linesep.encode('utf-8'))
+    TESTFIXTURE.append((content_type, file_content))
 
 
 @parameterized_class(('format', 'str'), TESTFIXTURE)
@@ -31,7 +33,13 @@ class SerializeTestCase(unittest.TestCase):
         self.parsed = SUT.deserialize(self.str, self.format)
 
     def test_serializes_as_original_when_unchanged(self):
+        if self.format == 'plist_binary':
+            # Nothing to test for binary format
+            return
+
         serialized = SUT.serialize(self.parsed, self.format)
+        if not isinstance(serialized, bytes):
+            serialized = serialized.encode('utf-8')
         self.assertEqual(self.str, serialized)
 
 
