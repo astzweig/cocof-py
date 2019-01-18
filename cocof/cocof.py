@@ -6,12 +6,12 @@ try:
     from json.decoder import JSONDecodeError
 except ImportError:
     JSONDecodeError = ValueError
-from .filehandling import parse_file, write_to_file
+from .filehandling import parse_file, write_to_file, guessFileFormat
 
 
 @click.command()
 @click.option('-f', '--format', 'file_format',
-              type=click.Choice(['toml', 'yaml', 'json']),
+              type=click.Choice(['toml', 'yaml', 'json', 'plist']),
               required=False,
               default=None,
               help='The format of the file. Obligatory if filepath is \'-\''
@@ -32,6 +32,7 @@ def cli(filepath, jsonpatch, file_format):
     in which case the output goes to stdout and you must provide the format of
     the data via the '--format' option."""
     try:
+        file_format = guessFileFormat(file_format)
         data = parse_file(filepath, file_format)
         patch = JsonPatch.from_string(jsonpatch)
         result = patch.apply(data)
