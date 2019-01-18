@@ -10,6 +10,10 @@ from ruamel.yaml import (
         round_trip_load as yaml_deserialize,
         round_trip_dump as yaml_serialize
 )
+try:
+    unicode
+except:
+    unicode = str
 
 
 def getFileExt(filepath):
@@ -46,6 +50,11 @@ def deserialize(serialized, format_hint):
         format_hint (str): The format of 'serialized_str'. Either one
                            of: yaml, toml, json or plist.
     """
+    try:
+        serialized = serialized.decode('utf-8')
+    except UnicodeDecodeError:
+        pass
+
     if format_hint == 'toml':
         return TOML.loads(serialized)
 
@@ -57,6 +66,8 @@ def deserialize(serialized, format_hint):
         return JSON.loads(serialized, object_pairs_hook=OrderedDict)
 
     elif format_hint == 'plist' or format_hint == 'plist_binary':
+        if isinstance(serialized, unicode):
+            serialized = serialized.encode('utf-8')
         return PLIST.readPlistFromString(serialized)
 
 
