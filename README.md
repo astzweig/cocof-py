@@ -5,11 +5,11 @@
 Cocof, short for consistent config file, is a python module that allows the
 modification of different key-value config files on the comand line.
 
-Most importantly: _It will keep line breaks and comments the same._ So the file
-will look more or less like the original (depending on the operations on it of
-course).
+Most importantly: For YAML and TOML it _It will keep line breaks and comments
+the same._ So the file will look more or less like the original (depending on
+the operations on it of course).
 
-Currently supported formats are TOML, YAML and JSON.
+Currently supported formats are TOML, YAML, JSON and PLIST.
 
 ### Install
 ```bash
@@ -29,16 +29,18 @@ Usage: cocof [OPTIONS] FILEPATH JSONPATCH
   the '--format' option.
 
 Options:
-  -f, --format [toml|yaml|json]  The format of the file. Obligatory if
-                                 filepath is '-' (stdin).
-  --help                         Show this message and exit.
+  -f, --format [toml|yaml|json|plist]
+                                  The format of the file. Obligatory if
+                                  filepath is '-' (stdin).
+  --help                          Show this message and exit.
 ```
 
 Cocof takes a file path and a [JSON patch][json_patch] string as arguments.
 It then modifies the datastructure given by the file's content accordingly and
 writies it back to the same file (in-place editing).
 You can also tell `cocof` to read from `stdin`, in which case it will output
-it's result to `stdout`.
+it's result to `stdout`. TOML, YAML and JSON expect their content to be `utf-8`
+encoded. PLIST expects either an `utf-8` encoded xml content or binary content.
 
 
 ### Examples
