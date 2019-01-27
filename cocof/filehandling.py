@@ -26,7 +26,7 @@ def getFileExt(filepath):
     return file_ext[1:]
 
 
-def guessFileFormat(filepath, format_hint=None):
+def guessFileFormat(filepath, format_hint):
     if format_hint is None:
         format_hint = getFileExt(filepath)
         if format_hint == '':
