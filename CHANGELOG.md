@@ -4,8 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.2] - 2019-01-27
+### Fixed
+- Fix the missing argument error volume 2. The changes introduced in
+  version 1.2.1 did not solve the problem, they just hid it. We reverted
+  those changes and fixed the real cause of the problem.
+- Fix an error, that would prevent the data to be written back to the
+  file and hence leave you with an empty file.
+
 ## [1.2.1] - 2019-01-27
-### Fix
+### Fixed
 - Fix the missing argument error. Because of a missing default value,
   cocof would not run but instead complain that an argument was missing.
   This has been fixed now.
