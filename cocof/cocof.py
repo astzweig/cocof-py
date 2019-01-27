@@ -32,7 +32,7 @@ def cli(filepath, jsonpatch, file_format):
     in which case the output goes to stdout and you must provide the format of
     the data via the '--format' option."""
     try:
-        file_format = guessFileFormat(file_format)
+        file_format = guessFileFormat(filepath, file_format)
         data = parse_file(filepath, file_format)
         patch = JsonPatch.from_string(jsonpatch)
         result = patch.apply(data)
