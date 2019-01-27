@@ -112,7 +112,7 @@ def write_to_file(filepath, datastructure, format_hint=None):
     """Write the datastructure into the conifg file at 'filepath'."""
     format_hint = guessFileFormat(filepath, format_hint)
     serialized = serialize(datastructure, format_hint)
-    if isinstance(serialized, str) and format_hint.endswith('_binary'):
+    if isinstance(serialized, str):
         serialized = serialized.encode('utf-8')
     with open_file(filepath, 'wb') as f:
         f.write(serialized)
