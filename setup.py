@@ -13,7 +13,7 @@ setup(
     description='Consistent CLI config file modifier',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    packages=find_packages(),
+    packages=find_packages(exclude=["tests*"]),
     url='https://github.com/astzweig/cocof-py',
     keywords=['toml', 'yaml', 'json', 'terminal', 'cli', 'edit'],
     classifiers=[
